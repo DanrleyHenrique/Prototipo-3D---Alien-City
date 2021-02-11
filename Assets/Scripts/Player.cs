@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int vidaPlayer;
+    public static int vidaPlayer;
     float tempo, tempoAux;         // Tempo da contagem regressiva
     bool dano, contagemRegressiva; //Contagem regressiva para permitir que o player so tome dano apos um determinado tempo
 
     int valorDano;
     public Text vida;
     bool interrompeDano;
+
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
         valorDano = 0;
         contagemRegressiva = false;
         interrompeDano = false;
+        
     }
 
     // Update is called once per frame
@@ -32,8 +35,11 @@ public class Player : MonoBehaviour
 
         if (dano && contagemRegressiva && interrompeDano == false)
         {
+            valorDano = 50;
             vidaPlayer -= valorDano;
-            Debug.Log(vidaPlayer);
+            vida.text = "Vida: " + vidaPlayer;
+
+            Debug.Log("DANO");
             interrompeDano = true;
         }
 
@@ -41,32 +47,47 @@ public class Player : MonoBehaviour
         if(contagemRegressiva)
         {
             tempo -= Time.deltaTime;
-
             if (tempo <= 0)
-            {
-                if(dano)
-                {                  
-                    interrompeDano = false;
-                }
+            { 
                 tempo = tempoAux;
-                
-
+                interrompeDano = false;
             }
-        }
+        }  
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Lava")
         {
+
             dano = true;
-            contagemRegressiva = dano; // Ativa contagem regressiva
-            valorDano = 50;
+            contagemRegressiva = true; // Ativa contagem regressiva
         }
-        if (other.gameObject.tag == "Chao")
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Lava")
         {
-            dano = false;
-            valorDano = 0;
-            contagemRegressiva = !contagemRegressiva;
+            Debug.Log("SAIU DA LAVA");
+            desativaSistemaDano();
         }
+    }
+
+
+   
+
+    public void desativaSistemaDano()
+    {
+        dano = false;
+        valorDano = 0;
+        contagemRegressiva = !contagemRegressiva;
+        interrompeDano = true;
+        tempo = 0;
+    }
+
+    public void diminuiVida()
+    {
+
     }
 }

@@ -20,7 +20,7 @@ public class TiroPropriedades : MonoBehaviour
         rotacaoY = player.transform.eulerAngles.y;
         transform.Rotate(0.0f, rotacaoY, 0.0f);
 
-        Debug.Log(rotacaoY);
+        //Debug.Log(rotacaoY);
 
         audioSource.Play();
     }
@@ -36,7 +36,7 @@ public class TiroPropriedades : MonoBehaviour
         if (other.gameObject.tag == "Quebravel")
         {
             Destroy(gameObject, 0f);
-            Debug.Log("TIro bateu na parede");
+            //Debug.Log("TIro bateu na parede");
         }
     }
 }

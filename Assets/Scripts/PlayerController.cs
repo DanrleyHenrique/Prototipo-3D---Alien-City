@@ -30,6 +30,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MyCamera.transform.eulerAngles.x = 
+
+        if (Player.vidaPlayer <= 0)
+        {
+            velocidade = 0;
+            velocidadeDeRotacao = 0;
+            anim.SetTrigger("Morre");
+        }
+
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
@@ -99,12 +108,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Lava")
-        {
-            anim.SetTrigger("Morre");
-        }
-    }
+    
 
 }
