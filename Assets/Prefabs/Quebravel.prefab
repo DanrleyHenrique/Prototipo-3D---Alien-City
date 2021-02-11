@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 8891605377120328648}
   - component: {fileID: 8891605377116904424}
   - component: {fileID: 8891605377117903144}
+  - component: {fileID: 508064370731651612}
+  - component: {fileID: -8612732913736049829}
+  - component: {fileID: 4630820852669547942}
   m_Layer: 0
   m_Name: Quebravel
-  m_TagString: Untagged
+  m_TagString: Quebravel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,3 +81,41 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &508064370731651612
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891605377120094184}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 23.69188, y: 25.392714, z: 9.66463}
+  m_Center: {x: 0.000004291536, y: -0.000004768373, z: -0.00000023841851}
+--- !u!114 &-8612732913736049829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891605377120094184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75633d2f167bd784781878342c4ba015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &4630820852669547942
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891605377120094184}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 23.69188, y: 25.392714, z: 9.66463}
+  m_Center: {x: 0.000004291536, y: -0.000004768373, z: -0.00000023841851}
