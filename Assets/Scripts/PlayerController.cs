@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Camera MyCamera;
+    private Camera MyCamera;
     private Animator anim;
-    private float velocidade, velocidadeDeRotacao = 15f;
+    private float velocidade, velocidadeDeRotacao = 3f;
 
     CharacterController MyController;
     private bool mov;
@@ -24,13 +24,14 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         MyController = GetComponent<CharacterController>();
         velocidade = 3.5f;
-        gravidade = -0.5f;
+        gravidade = -0.4f;
+        MyCamera = GameObject.Find("Camera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MyCamera.transform.eulerAngles.x = 
+        //MyCamera.transform.position = transform.position;
 
         if (Player.vidaPlayer <= 0)
         {
@@ -42,7 +43,30 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Jump") && !pulando)
+        //Debug.Log("X: " + x + " Z: " + z); //z frente e para tras
+
+        /*MyCamera.transform.position = new Vector3((transform.position.x), transform.position.y + 1.1f, transform.position.z - 2.2f);
+
+
+        if (z == 1) // Controle de camera
+        {
+            //para frente
+            //MyCamera.transform.position = new Vector3((transform.position.x), transform.position.y + 1.1f, transform.position.z - 2.2f);
+            
+        }
+        else if(z ==  -1)
+        {
+            // para tras
+            //MyCamera.transform.eulerAngles = new Vector3(x, 0, z);
+            //MyCamera.transform.position = new Vector3((transform.position.x), transform.position.y + 1.1f, transform.position.z - 2.2f);
+            //MyCamera.transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+        */
+
+
+
+
+        if (Input.GetButtonDown("Jump") && !pulando && Player.vidaPlayer > 0)
         {
             pulando = true;
             velocidadeY += velocidadeDePulo;
@@ -76,17 +100,29 @@ public class PlayerController : MonoBehaviour
             mov = false;
         }
 
-        Vector3 rotacaoMovimento = Quaternion.Euler(0, MyCamera.transform.rotation.eulerAngles.y, 0) * movimento;
-        MyController.Move((movimentoVertical + (rotacaoMovimento * velocidade)) * Time.deltaTime);
-
-        if(rotacaoMovimento.magnitude > 0)
+        //Vector3 rotacaoMovimento = Quaternion.Euler(0, MyCamera.transform.rotation.eulerAngles.y, 0) * movimento;
+        if (z >= 0)
         {
-            rotacaoDesejada = Mathf.Atan2(rotacaoMovimento.x, rotacaoMovimento.z) * Mathf.Rad2Deg;
+            Vector3 rotacaoMovimento = Quaternion.Euler(0, MyCamera.transform.rotation.eulerAngles.y, 0) * movimento;
+            MyController.Move((movimentoVertical + (rotacaoMovimento * velocidade)) * Time.deltaTime);
+
+            if (rotacaoMovimento.magnitude > 0)
+            {
+                rotacaoDesejada = Mathf.Atan2(rotacaoMovimento.x, rotacaoMovimento.z) * Mathf.Rad2Deg;
+
+            }
+            Quaternion rotacaoAtual = transform.rotation;
+            Quaternion rotacaoAlvo = Quaternion.Euler(0, rotacaoDesejada, 0);
+            transform.rotation = Quaternion.Lerp(rotacaoAtual, rotacaoAlvo, velocidadeDeRotacao * Time.deltaTime);
+        }
+        else if(z < 0)
+        {
+            //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (Time.deltaTime * z*velocidade));
+            Vector3 rotacaoMovimento = Quaternion.Euler(0, MyCamera.transform.rotation.eulerAngles.y, 0) * movimento;
+            MyController.Move((movimentoVertical + (rotacaoMovimento * velocidade)) * Time.deltaTime);
+
             
         }
-        Quaternion rotacaoAtual = transform.rotation;
-        Quaternion rotacaoAlvo = Quaternion.Euler(0, rotacaoDesejada, 0);
-        transform.rotation = Quaternion.Lerp(rotacaoAtual, rotacaoAlvo, velocidadeDeRotacao * Time.deltaTime);
     }
 
     void FixedUpdate()
