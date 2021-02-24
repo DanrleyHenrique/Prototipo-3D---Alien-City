@@ -8,6 +8,9 @@ TagManager:
   - Tiro
   - Quebravel
   - Chao
+  - muroEsmaga
+  - Pedra
+  - Chave
   layers:
   - Default
   - TransparentFX

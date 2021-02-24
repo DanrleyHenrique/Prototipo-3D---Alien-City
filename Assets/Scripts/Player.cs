@@ -7,13 +7,15 @@ public class Player : MonoBehaviour
 {
     public static int vidaPlayer;
     float tempo, tempoAux;         // Tempo da contagem regressiva
-    bool dano, contagemRegressiva; //Contagem regressiva para permitir que o player so tome dano apos um determinado tempo
+    public bool dano, contagemRegressiva; //Contagem regressiva para permitir que o player so tome dano apos um determinado tempo
 
-    int valorDano;
+    private int valorDano;
     public Text vida;
     bool interrompeDano;
+    public Text pontos;
 
-   
+    private int pontosInt;
+    private int chave;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,21 +26,22 @@ public class Player : MonoBehaviour
         valorDano = 0;
         contagemRegressiva = false;
         interrompeDano = false;
-        
+        pontosInt = 0;
+        chave = 0;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         vida.text = "Vida: " + vidaPlayer;
+        pontos.text = "Pontos: " + pontosInt;
 
 
         if (dano && contagemRegressiva && interrompeDano == false)
         {
-            valorDano = 50;
             vidaPlayer -= valorDano;
             vida.text = "Vida: " + vidaPlayer;
-
             Debug.Log("DANO");
             interrompeDano = true;
         }
@@ -57,21 +60,21 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Lava")
+        if(other.tag == "Pedra")
         {
-
-            dano = true;
-            contagemRegressiva = true; // Ativa contagem regressiva
+            pontosInt++;
+        }
+        if (other.tag == "Chave")
+        {
+           
+            chave++;
+            
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Lava")
-        {
-            Debug.Log("SAIU DA LAVA");
-            desativaSistemaDano();
-        }
+        
     }
 
 
@@ -89,5 +92,19 @@ public class Player : MonoBehaviour
     public void diminuiVida()
     {
 
+    }
+
+    public void Dano(int x, float t)
+    {
+        valorDano = x;
+        dano = true;
+        tempoAux = t;
+        tempo = tempoAux;
+        contagemRegressiva = true; // Ativa contagem regressiva
+    }
+
+    public int GetChaves()
+    {
+        return chave;
     }
 }
