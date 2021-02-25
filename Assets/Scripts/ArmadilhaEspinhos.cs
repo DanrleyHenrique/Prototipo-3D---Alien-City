@@ -13,7 +13,7 @@ public class ArmadilhaEspinhos : AbstractArmadilha
         tempo = 5;
         
         tempoFechado = 3;
-        dano = 15;
+        danoValor = 15;
         vitima = GameObject.Find("Alien").GetComponent<Player>();
     }
 
@@ -78,7 +78,7 @@ public class ArmadilhaEspinhos : AbstractArmadilha
         if (collision.tag == "Player")
         {
             Debug.Log("Armadilha colidiu com " + vitima.tag);
-            vitima.Dano(dano, 3f);
+            vitima.Dano(danoValor, 3f);
         }
     }
 }

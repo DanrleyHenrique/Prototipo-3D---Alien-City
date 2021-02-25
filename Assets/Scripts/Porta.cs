@@ -19,7 +19,7 @@ public class Porta : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log(jogador.GetChaves());
+        //Debug.Log(jogador.GetChaves());
         if (collision.tag == "Player" && jogador.GetChaves() == 2)
         {
             Destroy(gameObject, 0f);

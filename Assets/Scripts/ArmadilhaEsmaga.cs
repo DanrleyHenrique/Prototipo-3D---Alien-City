@@ -19,7 +19,7 @@ public class ArmadilhaEsmaga : AbstractArmadilha
         tempo = 0;
         tempoFechado = 3;
         tempoAux = 0;
-        dano = 10;
+        danoValor = 10;
         vitima = GameObject.Find("Alien").GetComponent<Player>();
         controle = true;
         touching = false;
@@ -99,13 +99,13 @@ public class ArmadilhaEsmaga : AbstractArmadilha
     {
 
         vitimaDano = true;
-        vitima.Dano(dano, 1);
+        vitima.Dano(danoValor, 1);
         
     }
 
     public void PararDano()
     {
-        
+       
 
     }
 

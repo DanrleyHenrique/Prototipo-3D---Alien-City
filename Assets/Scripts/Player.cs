@@ -35,13 +35,13 @@ public class Player : MonoBehaviour
     void Update()
     {
         vida.text = "Vida: " + vidaPlayer;
-        pontos.text = "Pontos: " + pontosInt;
+        pontos.text = "Pontuação: " + pontosInt;
 
 
         if (dano && contagemRegressiva && interrompeDano == false)
         {
-            vidaPlayer -= valorDano;
-            vida.text = "Vida: " + vidaPlayer;
+            
+            
             Debug.Log("DANO");
             interrompeDano = true;
         }
@@ -51,12 +51,14 @@ public class Player : MonoBehaviour
         {
             tempo -= Time.deltaTime;
             if (tempo <= 0)
-            { 
+            {
+                vidaPlayer -= valorDano;
                 tempo = tempoAux;
                 interrompeDano = false;
             }
         }  
     }
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -99,12 +101,17 @@ public class Player : MonoBehaviour
         valorDano = x;
         dano = true;
         tempoAux = t;
-        tempo = tempoAux;
+        tempo = 0;
         contagemRegressiva = true; // Ativa contagem regressiva
     }
 
     public int GetChaves()
     {
         return chave;
+    }
+
+    public int GetVida()
+    {
+        return vidaPlayer;
     }
 }

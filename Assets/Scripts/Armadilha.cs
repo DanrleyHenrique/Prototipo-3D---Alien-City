@@ -8,7 +8,7 @@ public class Armadilha : AbstractArmadilha
     // Start is called before the first frame update
     void Start()
     {
-        dano = 5;
+        danoValor = 5;
         vitima = GameObject.Find("Alien").GetComponent<Player>();
         
     }
@@ -35,7 +35,7 @@ public class Armadilha : AbstractArmadilha
         
         if (other.tag == "Player")
         {
-            
+            Debug.Log("Player saiu laava");
             vitima.desativaSistemaDano();
         }
     }
@@ -47,8 +47,8 @@ public class Armadilha : AbstractArmadilha
     {
        if(collision.tag == "Player")
         {
-            Debug.Log("Armadilha colidiu com " + vitima.tag);
-            vitima.Dano(dano, 1);
+            //Debug.Log("Armadilha colidiu com " + vitima.tag);
+            vitima.Dano(danoValor, 1);
         }
     }
 }

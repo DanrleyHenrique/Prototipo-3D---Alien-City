@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class AbstractArmadilha : MonoBehaviour
 {
-    protected int dano;
+    protected int danoValor;
     protected Player vitima;
     // Start is called before the first frame update
     void Start()
